@@ -19,7 +19,7 @@ from bot import MessageHandler, BotCommandHandler
 from admin import trusted
 import re, urllib
 
-_reURL = re.compile('.*?((?:(https?)://|(?=www\.))[\w:#@%/;$()~_?\+-=\\\.&]+).*?')
+_reURL = re.compile('.*?((?:(https?)://|(?=www\.))[\w:#@%/;$()~_?\+-=\\\.&]+).*?', re.I)
 _reTitle = re.compile('<title>(.*?)</title>', re.I | re.M)
 
 _enabled = True
@@ -45,6 +45,8 @@ def _handler(context):
 	m = _reURL.match(context.message)
 	if _enabled and m:
 		address, proto = m.groups()
+		
+		proto = (proto or '').lower()
 		
 		if not proto:
 			address = 'http://' + address
