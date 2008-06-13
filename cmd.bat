@@ -1,0 +1,2 @@
+python pyy.py
+pause

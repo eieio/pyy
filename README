@@ -1,0 +1,25 @@
+Release Notes
+
+06/13/2008
+
+This is the first release of Pyy, a relatively simple, but very flexible IRC
+bot. It is written and tested in Python 2.5 and though I haven't tested it on
+many platforms, it should work without problems on any platform with 2.5
+language support.
+
+Some possible points of interest:
+	* Extension modules are found in the modules directory under the base dir.
+	* Modules are used to implement even the bare minimum conversation with the
+	  server. Take a look at the modules default.py, ctcp.py, and bot.py to see
+	  how this works.
+	* There are four kinds of "hooks" that modules can use to extend the bot:
+	  ProtocolHandler, CtcpCommandHandler, BotCommandHandler,
+	  and MessageHandler. These are decorators that automatically hook the
+	  decorated function into list of handlers of the respective type. Look at
+	  irclib.py, bot.py, and ctcp.py to see how these work.
+	* The admin.py module supplies an additional decorator that can be chained
+	  with BotCommandHandler to automatically enforce the token based access
+	  policy on that command.
+
+Corey Tabaka
+me [at] coreytabaka {dot} com
