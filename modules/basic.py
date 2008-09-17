@@ -59,7 +59,7 @@ def _do(context):
 @BotCommandHandler('say')
 @trusted
 def _say(context):
-	'''Usage: do [@(nick | channel)] <message>\nDirects the given message at nick or channel'''
+	'''Usage: say [@(nick | channel)] <message>\nDirects the given message at nick or channel'''
 	m = re.match('(?:@(#{0,2}[^\s]+)\s+)?(.*)', context.args)
 	if m:
 		where, what = m.groups()
