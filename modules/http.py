@@ -17,6 +17,7 @@
 
 from bot import MessageHandler, BotCommandHandler
 from admin import trusted
+from threaded import threaded
 import re, urllib
 
 _reURL = re.compile('.*?((?:(https?)://|(?=www\.))[\w:#@%/;$()~_?\+-=\\\.&]+).*?', re.I)
@@ -41,6 +42,7 @@ def _http(context):
 		context.reply('Usage: http [enable|disable]')
 
 @MessageHandler
+@threaded
 def _handler(context):
 	m = _reURL.match(context.message)
 	if _enabled and m:
