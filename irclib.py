@@ -20,6 +20,7 @@ import os
 import socket
 import string
 import re
+import traceback
 
 class IRCProtocol(object):
 	def __init__(self, socket, logfile=None):
@@ -199,7 +200,7 @@ class CommandProcessor(IRCProtocol):
 				try:
 					self.loadModule(name)
 				except:
-					self.log('!!!', str(sys.exc_value))
+					self.log('!!!', traceback.format_exc())
 	
 	def loadModule(self, name):
 		module = _import('modules.%s' % name)
