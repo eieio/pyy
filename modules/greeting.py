@@ -31,13 +31,15 @@ _greetings = {
 	getattr(pyy, 'MASTER', '') : {
 		'JOIN' : ["I'm ready master"],
 		'PART' : ['*snif*', '\x01ACTION cries\x01', '*bark*'] + [None] * 5,
-		'PRIVMSG' : ["Ain't it the truth?"] + [None] * 15,
+		'QUIT' : ['*snif*', '\x01ACTION cries\x01', '*bark*'] + [None] * 5,
+		'PRIVMSG' : ["Ain't it the truth?"] + [None] * 8,
 	},
 }
 
 _default = {
 	'JOIN' : ['hi %s', '\x01ACTION looks %s up and down\x01'] + [None] * 3,
 	'PART' : ['see ya', 'see ya %s'] + [None] * 4,
+	'QUIT' : ['see ya', 'see ya %s'] + [None] * 4,
 }
 
 SILENT = 0
@@ -87,6 +89,11 @@ def _greet(context):
 
 @ProtocolHandler('JOIN')
 def _JOIN(context):
+	channel = (context.params or '').strip(': ')
+	_doGreeting(context, channel)
+
+@ProtocolHandler('QUIT')
+def _QUIT(context):
 	channel = (context.params or '').strip(': ')
 	_doGreeting(context, channel)
 
