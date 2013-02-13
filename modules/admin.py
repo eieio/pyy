@@ -137,7 +137,14 @@ if not len(_db):
 	except:
 		print 'Failed to create default admin user:', str(sys.exc_value)
 
-_administrators = dict([(nick, AdminUser(nick, access)) for nick, access in _db.iteritems()])
+# work around missing iter method
+def dbiteritems(db):
+	if hasattr(db, 'iteritems'):
+		return db.iteritems()
+	else:
+		return ((key, db.get(key)) for key in db.keys())
+
+_administrators = dict([(nick, AdminUser(nick, access)) for nick, access in dbiteritems(_db)])
 _aliases = dict()
 
 @BotCommandHandler('auth')
