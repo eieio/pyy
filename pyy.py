@@ -19,6 +19,7 @@ import sys
 import socket
 import random
 from irclib import *
+import modules.admin
 
 # TODO: move this to a config file at some point
 
