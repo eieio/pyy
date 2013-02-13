@@ -316,3 +316,15 @@ def _320(context):
 		if admin and 'is identified to services' in message:
 			admin.identified = True
 			admin.runEvent('auth_whois')
+
+@ProtocolHandler('307')
+def _307(context):
+	m = re.match('([^\s]+)\s+([^\s]+)\s+:(.*)', context.params)
+	if m:
+		me, nick, message = m.groups()
+		admin = _administrators.get(nick)
+		
+		if admin and 'is a registered nick' in message:
+			admin.identified = True
+			admin.runEvent('auth_whois')
+
