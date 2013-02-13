@@ -242,6 +242,9 @@ class CommandProcessor(IRCProtocol):
 	def cmdloop(self):
 		newline = re.compile('\r\n')
 		buffer = ''
+
+		self.nick(self._nick)
+		self.user(os.getlogin(), socket.gethostname(), self._host, 'pyy')
 		
 		while not (self.__quit or CommandProcessor._exit):
 			buffer += self._socket.recv(1)
